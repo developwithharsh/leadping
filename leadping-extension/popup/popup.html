@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeadPing</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <header class="popup-header">
+    <div class="popup-logo">
+      <span class="popup-logo-icon">⚡</span>
+      <span class="popup-logo-text">LeadPing</span>
+    </div>
+    <div class="popup-header-right">
+      <span id="tier-badge" class="tier-badge tier-free">Free</span>
+      <button id="settings-btn" class="icon-btn" title="Settings">⚙️</button>
+    </div>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat-card stat-detected">
+      <div id="stat-detected" class="stat-num">0</div>
+      <div class="stat-label">📥 Detected</div>
+    </div>
+    <div class="stat-card stat-followed">
+      <div id="stat-followed" class="stat-num">0</div>
+      <div class="stat-label">✅ Followed Up</div>
+    </div>
+    <div class="stat-card stat-pending">
+      <div id="stat-pending" class="stat-num">0</div>
+      <div class="stat-label">⏳ Pending</div>
+    </div>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="indiamart">IndiaMART</button>
+    <button class="tab" data-filter="justdial">JustDial</button>
+    <button class="tab" data-filter="tradeindia">TradeIndia</button>
+  </div>
+
+  <div id="lead-list" class="lead-list"></div>
+
+  <div id="empty-state" class="empty-state" style="display:none">
+    <p class="empty-icon">⚡</p>
+    <p class="empty-title">LeadPing is watching</p>
+    <p class="empty-sub">Open IndiaMART, JustDial, or TradeIndia to detect leads automatically.</p>
+  </div>
+
+  <footer class="popup-footer">
+    <span id="total-count" class="footer-count">0 leads today</span>
+    <div class="footer-actions">
+      <button id="export-csv" class="btn-export">↓ CSV</button>
+      <button id="export-json" class="btn-export">↓ JSON</button>
+    </div>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

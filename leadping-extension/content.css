@@ -1,0 +1,267 @@
+.lp-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #EBF4FD;
+  border: 1px solid #B5D4F4;
+  border-radius: 8px;
+  flex-wrap: wrap;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.lp-badge {
+  font-size: 11px;
+  background: #0C2D5E;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.lp-wa-btn {
+  background: #25D366;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lp-wa-btn:hover { background: #1DA855; }
+.lp-wa-btn:disabled { background: #cccccc; cursor: not-allowed; }
+.lp-wa-btn.lp-sent { background: #128C7E; }
+
+.lp-ai-btn {
+  background: #ffffff;
+  color: #185FA5;
+  border: 1px solid #185FA5;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lp-ai-btn:hover { background: #EBF4FD; }
+
+.lp-status {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+}
+.lp-status-pending    { background: #FEF9C3; color: #854D0E; }
+.lp-status-followed_up { background: #DCFCE7; color: #166534; }
+.lp-status-called_back { background: #DBEAFE; color: #1E40AF; }
+.lp-status-interested  { background: #F3E8FF; color: #6B21A8; }
+.lp-status-closed_won  { background: #DCFCE7; color: #14532D; }
+.lp-status-closed_lost { background: #FEE2E2; color: #991B1B; }
+
+.lp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.52);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lp-modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  width: 400px;
+  max-width: 92vw;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.lp-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.lp-modal-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0C2D5E;
+  margin: 0;
+}
+
+.lp-modal-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6B7280;
+  padding: 0 4px;
+  line-height: 1;
+}
+.lp-modal-close:hover { color: #111827; }
+
+.lp-modal-buyer {
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.phone-chip {
+  background: #EBF4FD;
+  color: #185FA5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid #B5D4F4;
+}
+
+.lp-msg-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.lp-msg-label label {
+  font-size: 12px;
+  color: #6B7280;
+}
+.lp-regen-btn {
+  background: none;
+  border: none;
+  color: #185FA5;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.lp-regen-btn:hover { background: #EBF4FD; }
+
+.lp-modal textarea {
+  width: 100%;
+  height: 110px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+  font-family: system-ui, -apple-system, sans-serif;
+  resize: vertical;
+  outline: none;
+  line-height: 1.5;
+  box-sizing: border-box;
+  color: #374151;
+}
+.lp-modal textarea:focus { border-color: #185FA5; }
+
+.lp-modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.lp-btn-send {
+  flex: 1;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+.lp-btn-send:hover { background: #1DA855; }
+
+.lp-btn-cancel {
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+.lp-btn-cancel:hover { background: #E5E7EB; }
+
+.lp-upgrade-banner {
+  background: #FEF9C3;
+  border: 1px solid #FDE047;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #854D0E;
+}
+
+.lp-upgrade-modal {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 440px;
+  max-width: 92vw;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.lp-upgrade-modal h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #0C2D5E;
+  margin: 0 0 16px 0;
+}
+
+.lp-plan-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.lp-plan-card {
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+.lp-plan-card.highlight { border-color: #185FA5; background: #EBF4FD; }
+.lp-plan-card .plan-name { font-weight: 600; color: #0C2D5E; margin-bottom: 4px; }
+.lp-plan-card .plan-price { font-size: 15px; font-weight: 700; color: #185FA5; }
+.lp-plan-card .plan-feature { color: #6B7280; margin-top: 4px; }
+
+.lp-upi-box {
+  background: #F0FDF4;
+  border: 1px solid #86EFAC;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #166534;
+}
+
+.lp-activate-link {
+  font-size: 12px;
+  color: #185FA5;
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+}

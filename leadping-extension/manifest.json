@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "LeadPing – WhatsApp Follow-Up for IndiaMART, JustDial & TradeIndia",
+  "version": "1.0.0",
+  "description": "1-click AI WhatsApp follow-up for your IndiaMART, JustDial & TradeIndia leads. Never lose a lead again.",
+  "permissions": ["storage", "notifications", "tabs", "activeTab", "alarms"],
+  "host_permissions": [
+    "https://leadmanager.indiamart.com/*",
+    "https://seller.indiamart.com/*",
+    "https://my.justdial.com/*",
+    "https://seller.tradeindia.com/*",
+    "https://*.onrender.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://leadmanager.indiamart.com/*", "https://seller.indiamart.com/*"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-indiamart.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://my.justdial.com/*"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-justdial.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://seller.tradeindia.com/*"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-tradeindia.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "LeadPing"
+  },
+  "options_page": "options/options.html"
+}
