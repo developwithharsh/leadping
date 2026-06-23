@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeadPing</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="sb-header">
+    <div class="sb-logo">
+      <img src="../icons/icon32.png" class="sb-logo-img" alt="LeadPing">
+      <div class="sb-logo-text">
+        <span class="sb-brand">LeadPing</span>
+        <span class="sb-tagline">Lead Follow-Up</span>
+      </div>
+    </div>
+    <div class="sb-header-actions">
+      <span id="tier-badge" class="tier-badge tier-free">Free</span>
+      <button id="refresh-btn" class="icon-btn" title="Refresh leads">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      </button>
+      <button id="settings-btn" class="icon-btn" title="Settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div id="stat-detected" class="stat-num detected">0</div>
+      <div class="stat-label">Detected</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-card">
+      <div id="stat-followed" class="stat-num followed">0</div>
+      <div class="stat-label">Followed Up</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-card">
+      <div id="stat-pending" class="stat-num pending">0</div>
+      <div class="stat-label">Pending</div>
+    </div>
+  </div>
+
+  <!-- PLATFORM FILTERS -->
+  <div class="filter-row">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="indiamart">
+      <span class="chip-dot dot-im"></span>IndiaMART
+    </button>
+    <button class="filter-chip" data-filter="justdial">
+      <span class="chip-dot dot-jd"></span>JustDial
+    </button>
+    <button class="filter-chip" data-filter="tradeindia">
+      <span class="chip-dot dot-ti"></span>TradeIndia
+    </button>
+  </div>
+
+  <!-- STATUS FILTER -->
+  <div class="status-filter-row">
+    <button class="status-chip active" data-status="all">All Status</button>
+    <button class="status-chip" data-status="pending">⏳ Pending</button>
+    <button class="status-chip" data-status="followed_up">✅ Followed</button>
+    <button class="status-chip" data-status="interested">⭐ Interested</button>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-row">
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" class="search-input" placeholder="Search leads...">
+    </div>
+  </div>
+
+  <!-- LEAD LIST -->
+  <div id="lead-list" class="lead-list"></div>
+
+  <!-- EMPTY STATE -->
+  <div id="empty-state" class="empty-state" style="display:none">
+    <div class="empty-illustration">⚡</div>
+    <div class="empty-title">LeadPing is watching</div>
+    <div class="empty-sub">Open IndiaMART, JustDial, or TradeIndia to auto-detect leads.</div>
+    <div class="empty-links">
+      <a href="https://leadmanager.indiamart.com/" target="_blank" class="platform-link im-link">Open IndiaMART</a>
+      <a href="https://my.justdial.com/" target="_blank" class="platform-link jd-link">Open JustDial</a>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <span id="total-count" class="bottom-count">0 leads today</span>
+    <div class="bottom-actions">
+      <button id="export-csv" class="btn-export" title="Export CSV">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CSV
+      </button>
+      <button id="export-json" class="btn-export" title="Export JSON">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        JSON
+      </button>
+    </div>
+  </div>
+
+  <!-- AI MESSAGE MODAL -->
+  <div id="ai-modal" class="modal-backdrop" style="display:none">
+    <div class="ai-modal">
+      <div class="ai-modal-header">
+        <div class="ai-modal-title">
+          <span class="ai-title-icon">📱</span>
+          <span>Send WhatsApp Message</span>
+        </div>
+        <button id="ai-modal-close" class="modal-close-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="ai-modal-buyer" id="ai-modal-buyer">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="ai-msg-label-row">
+        <span class="ai-msg-label">✨ AI-generated message (editable)</span>
+        <button id="ai-regen-btn" class="regen-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Regenerate
+        </button>
+      </div>
+      <textarea id="ai-textarea" class="ai-textarea" rows="5" placeholder="Generating message..."></textarea>
+
+      <div class="ai-modal-actions">
+        <button id="ai-cancel-btn" class="btn-cancel-modal">Cancel</button>
+        <button id="ai-send-btn" class="btn-send-wa">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          Send on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPGRADE MODAL -->
+  <div id="upgrade-modal" class="modal-backdrop" style="display:none">
+    <div class="upgrade-modal">
+      <div class="upgrade-header">
+        <span>🚀 Upgrade to LeadPing Pro</span>
+        <button id="upgrade-close" class="modal-close-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">₹0</div>
+          <ul class="plan-features">
+            <li>10 WhatsApp/day</li>
+            <li>3 AI messages/day</li>
+            <li>IndiaMART only</li>
+          </ul>
+        </div>
+        <div class="plan-card plan-highlight">
+          <div class="plan-badge">POPULAR</div>
+          <div class="plan-name">Lifetime</div>
+          <div class="plan-price">₹1,999</div>
+          <ul class="plan-features">
+            <li>✅ Unlimited WhatsApp</li>
+            <li>✅ Unlimited AI</li>
+            <li>✅ All 3 platforms</li>
+            <li>✅ Forever, no renewal</li>
+          </ul>
+        </div>
+      </div>
+      <div class="upi-box">
+        💳 Pay ₹1,999 to <strong>leadping@upi</strong><br>
+        📱 Send screenshot to WhatsApp: <strong>+91 9999999999</strong>
+      </div>
+      <button id="go-activate-btn" class="btn-activate-link">Already bought? Enter license key →</button>
+    </div>
+  </div>
+
+  <script src="../utils/storage.js"></script>
+  <script src="../utils/api.js"></script>
+  <script src="../utils/whatsapp.js"></script>
+  <script src="../utils/templates.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>

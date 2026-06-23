@@ -3,7 +3,7 @@
   "name": "LeadPing – WhatsApp Follow-Up for IndiaMART, JustDial & TradeIndia",
   "version": "1.0.0",
   "description": "1-click AI WhatsApp follow-up for your IndiaMART, JustDial & TradeIndia leads. Never lose a lead again.",
-  "permissions": ["storage", "notifications", "tabs", "activeTab", "alarms"],
+  "permissions": ["storage", "notifications", "tabs", "activeTab", "alarms", "sidePanel"],
   "host_permissions": [
     "https://leadmanager.indiamart.com/*",
     "https://seller.indiamart.com/*",
@@ -34,9 +34,23 @@
       "run_at": "document_idle"
     }
   ],
+  "side_panel": {
+    "default_path": "sidebar/sidebar.html"
+  },
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_title": "LeadPing"
+    "default_title": "LeadPing – Open Sidebar",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "options_page": "options/options.html"
 }

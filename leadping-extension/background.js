@@ -1,15 +1,37 @@
 function getFallbackTemplate(platform) {
   var templates = {
-    indiamart: 'Namaste! Aapka inquiry mila. Hum aapko best price aur quality denge. Kab baat ho sakti hai? 🙏',
+    indiamart: 'Namaste! IndiaMART pe aapki inquiry mili. Hum aapko best price aur quality denge. Kab baat ho sakti hai? 🙏',
     justdial: 'Hello! JustDial pe aapki query mili. Hamara service top rated hai. Kab contact karein? 📞',
     tradeindia: 'Namaskar! TradeIndia pe aapka message mila. Product details aur rates abhi share karte hain. 🤝'
   };
   return templates[platform] || templates.indiamart;
 }
 
+// Open side panel when extension icon is clicked
+chrome.action.onClicked.addListener(function(tab) {
+  chrome.sidePanel.open({ windowId: tab.windowId });
+});
+
+// Set side panel behavior — open on action click
+chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(function() {});
+
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
   if (msg.type === 'PING') {
     sendResponse({ pong: true });
+    return false;
+  }
+
+  if (msg.type === 'OPEN_OPTIONS') {
+    chrome.runtime.openOptionsPage();
+    sendResponse({ success: true });
+    return false;
+  }
+
+  if (msg.type === 'OPEN_SIDEBAR') {
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      if (tabs[0]) chrome.sidePanel.open({ windowId: tabs[0].windowId });
+    });
+    sendResponse({ success: true });
     return false;
   }
 
@@ -54,6 +76,13 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 
   if (msg.type === 'CANCEL_REMINDER') {
     chrome.alarms.clear('reminder_' + msg.lead_id);
+    sendResponse({ success: true });
+    return false;
+  }
+
+  if (msg.type === 'LEADS_UPDATED') {
+    // Broadcast to sidebar to refresh
+    chrome.runtime.sendMessage({ type: 'REFRESH_SIDEBAR' }).catch(function() {});
     sendResponse({ success: true });
     return false;
   }

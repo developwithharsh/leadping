@@ -106,7 +106,9 @@
       var leadData = extractLeadData(card);
       var leadId = (card.dataset && card.dataset.id) ? ('jd_' + card.dataset.id) : ('lp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8));
       var lead = Object.assign({ lead_id: leadId, detected_at: Date.now(), status: 'pending' }, leadData);
-      StorageUtil.saveLead(lead);
+      StorageUtil.saveLead(lead).then(function() {
+        chrome.runtime.sendMessage({ type: 'LEADS_UPDATED' }).catch(function() {});
+      });
       if (currentUserId) ApiClient.saveLead(currentUserId, lead);
       injectLeadPingUI(card, lead);
     } catch(e) {}
