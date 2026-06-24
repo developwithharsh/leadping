@@ -127,6 +127,22 @@ chrome.notifications.onClicked.addListener(function(notifId) {
   }
 });
 
+// Keep service worker alive
 setInterval(function() {
   chrome.runtime.sendMessage({ type: 'PING' }).catch(function() {});
 }, 25000);
+
+// Keep Render backend awake — free tier spins down after 15 min inactivity
+// Ping every 14 minutes so the server is always warm when user opens sidebar
+(function keepBackendAwake() {
+  chrome.storage.local.get(['BACKEND_URL'], function(result) {
+    var url = (result.BACKEND_URL || 'https://leadping-7y2w.onrender.com') + '/api/config';
+    fetch(url).catch(function() {});
+  });
+  setInterval(function() {
+    chrome.storage.local.get(['BACKEND_URL'], function(result) {
+      var url = (result.BACKEND_URL || 'https://leadping-7y2w.onrender.com') + '/api/config';
+      fetch(url).catch(function() {});
+    });
+  }, 14 * 60 * 1000);
+})();
