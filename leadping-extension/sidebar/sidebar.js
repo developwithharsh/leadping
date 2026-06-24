@@ -11,6 +11,12 @@ var activeModalLead = null;
 // ── INIT ──────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Warm the remote config cache on sidebar open (non-blocking)
+  if (typeof RemoteConfig !== 'undefined') {
+    RemoteConfig.get().then(function() {
+      showAnnouncement();
+    }).catch(function() {});
+  }
   loadState();
   bindEvents();
   listenForUpdates();
@@ -586,9 +592,34 @@ function saveNote(leadId, notes, btn) {
   });
 }
 
+// ── ANNOUNCEMENT BANNER ────────────────────────────────────────────────
+
+function showAnnouncement() {
+  if (typeof RemoteConfig === 'undefined') return;
+  var ann = RemoteConfig.getAnnouncement();
+  var banner = document.getElementById('announcement-banner');
+  if (!banner) return;
+  if (ann && ann.text) {
+    banner.textContent = ann.text;
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
 // ── UPGRADE MODAL ──────────────────────────────────────────────────────
 
 function showUpgradeModal() {
+  // Populate upgrade modal with remote config values when available
+  if (typeof RemoteConfig !== 'undefined') {
+    var info = RemoteConfig.getUpgradeInfo();
+    var priceEl = document.getElementById('upgrade-price');
+    var upiEl   = document.getElementById('upgrade-upi');
+    var waEl    = document.getElementById('upgrade-wa');
+    if (priceEl && info.pricing) priceEl.textContent = '₹' + (info.pricing.lifetime || 1999);
+    if (upiEl && info.upi_id)   upiEl.textContent = info.upi_id;
+    if (waEl && info.whatsapp_number) waEl.textContent = info.whatsapp_number;
+  }
   document.getElementById('upgrade-modal').style.display = 'flex';
 }
 function closeUpgradeModal() {

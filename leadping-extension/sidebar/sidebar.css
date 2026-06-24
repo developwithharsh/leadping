@@ -124,6 +124,17 @@ html, body {
 }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
+/* ── ANNOUNCEMENT BANNER ──────────────── */
+.announcement-banner {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  color: #1a1a1a;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 14px;
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* ── STATS ──────────────────────────────── */
 .stats-row {
   display: flex;

@@ -65,9 +65,12 @@ var TemplateUtil = (function() {
   function getAll() {
     return new Promise(function(resolve) {
       try {
+        // Remote templates override local defaults when present
+        var remoteTemplates = (typeof RemoteConfig !== 'undefined') ? RemoteConfig.getTemplates() : null;
         chrome.storage.local.get(['custom_templates'], function(result) {
+          var base = remoteTemplates || DEFAULT_TEMPLATES;
           var custom = result.custom_templates || [];
-          resolve(DEFAULT_TEMPLATES.concat(custom));
+          resolve(base.concat(custom));
         });
       } catch(e) {
         resolve(DEFAULT_TEMPLATES.slice());

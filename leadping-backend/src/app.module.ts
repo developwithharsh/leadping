@@ -7,6 +7,7 @@ import { AiModule } from './ai/ai.module';
 import { LeadsModule } from './leads/leads.module';
 import { UsageModule } from './usage/usage.module';
 import { AdminModule } from './admin/admin.module';
+import { RemoteConfigModule } from './config/config.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AdminModule } from './admin/admin.module';
     LeadsModule,
     UsageModule,
     AdminModule,
+    RemoteConfigModule,
   ],
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
+import { ConfigService } from '../config/config.service';
 
 function getFallbackMessage(platform: string): string {
   const messages: Record<string, string> = {
@@ -21,6 +22,7 @@ function getLimits(tier: string) {
 export class AiService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private readonly remoteConfig: ConfigService,
   ) {}
 
   async generateMessage(
@@ -60,7 +62,9 @@ export class AiService {
       const groqKey = process.env.GROQ_API_KEY;
       if (!groqKey) return { message: getFallbackMessage(platform), fallback: true };
 
-      const systemPrompt = 'You are an Indian B2B business WhatsApp assistant. Write SHORT warm friendly Hinglish follow-up messages for sellers responding to buyer inquiries. Maximum 60 words. Always start with Namaste {name}ji. Mention the product. End with 🙏. Sound like a real Indian businessman texting, not a formal email.';
+      // System prompt comes from remote config — update on backend to take effect instantly
+      const cfg = this.remoteConfig.getRemoteConfig(user.tier);
+      const systemPrompt = cfg.ai.system_prompt;
       const userPrompt = `Write a WhatsApp follow-up message for: Buyer Name: ${buyer_name || 'the buyer'}, Product: ${product || 'your product'}, City: ${city || 'your city'}, Company: ${company || 'your company'}, Platform: ${platform}`;
 
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {

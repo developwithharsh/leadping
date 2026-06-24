@@ -17,19 +17,19 @@
   "content_scripts": [
     {
       "matches": ["https://leadmanager.indiamart.com/*", "https://seller.indiamart.com/*"],
-      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-indiamart.js"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/remote-config.js", "utils/whatsapp.js", "utils/templates.js", "content-indiamart.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
     },
     {
       "matches": ["https://my.justdial.com/*"],
-      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-justdial.js"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/remote-config.js", "utils/whatsapp.js", "utils/templates.js", "content-justdial.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
     },
     {
       "matches": ["https://seller.tradeindia.com/*"],
-      "js": ["utils/storage.js", "utils/api.js", "utils/whatsapp.js", "utils/templates.js", "content-tradeindia.js"],
+      "js": ["utils/storage.js", "utils/api.js", "utils/remote-config.js", "utils/whatsapp.js", "utils/templates.js", "content-tradeindia.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
     }

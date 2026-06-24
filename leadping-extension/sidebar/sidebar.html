@@ -28,6 +28,9 @@
     </div>
   </header>
 
+  <!-- ANNOUNCEMENT BANNER (hidden by default; shown dynamically when remote config has announcement) -->
+  <div id="announcement-banner" style="display:none" class="announcement-banner"></div>
+
   <!-- STATS ROW -->
   <div class="stats-row">
     <div class="stat-card">
@@ -173,8 +176,8 @@
         </div>
       </div>
       <div class="upi-box">
-        💳 Pay ₹1,999 to <strong>leadping@upi</strong><br>
-        📱 Send screenshot to WhatsApp: <strong>+91 9999999999</strong>
+        💳 Pay <strong id="upgrade-price">₹1,999</strong> to <strong id="upgrade-upi">leadping@upi</strong><br>
+        📱 Send screenshot to WhatsApp: <strong id="upgrade-wa">+91 9999999999</strong>
       </div>
       <button id="go-activate-btn" class="btn-activate-link">Already bought? Enter license key →</button>
     </div>
@@ -182,6 +185,7 @@
 
   <script src="../utils/storage.js"></script>
   <script src="../utils/api.js"></script>
+  <script src="../utils/remote-config.js"></script>
   <script src="../utils/whatsapp.js"></script>
   <script src="../utils/templates.js"></script>
   <script src="sidebar.js"></script>
